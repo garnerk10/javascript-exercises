@@ -4,28 +4,33 @@ const caesar = function(str, shift) {
     for(let i = 0; i < str.length; i++){
         let initialCode = str.charCodeAt(i);
 
+        //if character is lowercase
         if(initialCode >= 97 && initialCode <= 122){
-            let newCode = initialCode + shift;
-            if(newCode > 122){
-                newCode - 26;
-                newStr += String.fromCharCode(newCode);
-            } else if(newCode < 97){
-                newCode + 26;
-                newStr += String.fromCharCode(newCode);
-            } else {newStr += String.fromCharCode(newCode);};
+            let newLowerCode = initialCode + (shift % 26);
+
+            if(newLowerCode > 122){
+                newLowerCode -= 26;
+                newStr += String.fromCharCode(newLowerCode);
+            } else if(newLowerCode < 97){
+                newLowerCode += 26;
+                newStr += String.fromCharCode(newLowerCode);
+            } else {newStr += String.fromCharCode(newLowerCode);};
         } 
         
+        //if character is uppercase
         else if(initialCode >= 65 && initialCode <= 90){
-            let newCode = initialCode + shift;
-            if(newCode > 90){
-                newCode - 26;
-                newStr += String.fromCharCode(newCode);
-            } else if(newCode < 65){
-                newCode + 26;
-                newStr += String.fromCharCode(newCode);
-            } else {newStr += String.fromCharCode(newCode);};
+            let newUpperCode = initialCode + (shift % 26);
+
+            if(newUpperCode > 90){
+                newUpperCode -= 26;
+                newStr += String.fromCharCode(newUpperCode);
+            } else if(newUpperCode < 65){
+                newUpperCode += 26;
+                newStr += String.fromCharCode(newUpperCode);
+            } else {newStr += String.fromCharCode(newUpperCode);};
         }
         
+        //if character is not alphabetical
         else {
             newStr += String.fromCharCode(initialCode);
         };
@@ -34,5 +39,6 @@ const caesar = function(str, shift) {
     return newStr;
 };
 
+caesar('Hello, World!', 75);
 // Do not edit below this line
 module.exports = caesar;
